@@ -1,0 +1,5 @@
+npm i express -g  express-generator -g 
+npm i 
+npm nodemon  
+npm i axios knex mysql2 dotenv 
+npm i @hapi/joi jwt sha1 uuid  multer 
