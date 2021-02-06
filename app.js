@@ -8,8 +8,15 @@ var logger = require("morgan");
 //const cors = require("cors");
 
 const dotenv = require("dotenv");
+const { secured } = require("./middlewares/auth");
 dotenv.config();
 var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+
+const auth = require("./routes/auth");
+const perfil = require("./routes/perfil");
+const registro = require("./routes/registro");
+
 //var usersRouter = require("./routes/users");
 const personas = require("./routes/personas");
 const categorias = require("./routes/categorias");
@@ -26,7 +33,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 //app.use(cors()); //usando el cors
 app.use("/", indexRouter);
-//app.use("/users", usersRouter);
+app.use("/auth", auth);
+//aplicamos el middelware
+app.use("/perfil", secured, perfil);
+app.use("/registro", registro);
+app.use("/users", usersRouter);
+
 app.use("/personas", personas); // http://localhost:3000/personas
 app.use("/categorias", categorias);
 
